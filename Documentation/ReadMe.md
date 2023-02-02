@@ -79,3 +79,18 @@ per data
 - Permettere ai ristoratori di visualizzare le statistiche degli ordini 
 L'utente visualizza le statistiche degli ordini ricevuti per mese/anno e l'ammontare
 delle vendite
+
+
+## bottoni
+
+-link
+`https://uiverse.io/Cornerstone-04/bitter-impala-54`
+
+-aggiunta al carrello e paga/modifica ordine
+`https://uiverse.io/cssbuttons-io/stupid-impala-51`
+
+
+-form submit (search-form), menu e tasto login per l'admin
+`https://uiverse.io/gagan-gv/massive-goat-19`
+
+
