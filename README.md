@@ -64,3 +64,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## QUESTIONS ##
+
+- La tabella categories riferita ai piatti non l'avete fatta apposta?
+- Nelle varie tabelle dove ci dovrebbero essere i booleani c'è un tyni int(1), è corretto?
