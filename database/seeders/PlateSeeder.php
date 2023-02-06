@@ -19,7 +19,7 @@ class PlateSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $new_plate = new Plate();
             $new_plate->restaurant_id = $faker->randomNumber(1, true);
-            $new_plate->name = $faker->randomWord();
+            $new_plate->name = $faker->word();
             $new_plate->description = $faker->paragraph();
             $new_plate->price = $faker->randomFloat(2, 1, 900);
             $new_plate->best_seller = false;
