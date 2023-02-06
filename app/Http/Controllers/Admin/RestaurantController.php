@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
@@ -16,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -26,7 +28,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -37,7 +39,21 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        //
+       $val_data = $request->validated();
+        if ($request->hasFile('cover_image')){
+            $img_path = Storage::disk('public')->put('restaurant_images', $request['cover_image']);
+            $val_data['cover_image'] =   $img_path;
+        }
+
+
+        $val_data['user_id'] = Auth::id();
+
+        $restaurant_details = Restaurant::create($val_data);
+        // if ($request->has('types')) {
+        //     $project->types()->attach($val_data['types']);
+        // }
+
+        return redirect()->route('admin.dashboard')->with('message', "$restaurant_details->restaurant_name add successfully");
     }
 
     /**

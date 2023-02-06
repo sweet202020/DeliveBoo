@@ -13,7 +13,7 @@ class StoreRestaurantRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'restaurant_name'=>'required|max:80',
+            'address'=>'required|max:100',
+            'opening_time' => 'required|max:50',
+            'delivery_price' =>'required|max:7',
+            'cover_image' => 'required|image|max:300',
+            'partita_iva' => 'required|max:20',
+            
         ];
     }
 }

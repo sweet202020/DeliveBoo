@@ -26,11 +26,10 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    /* Route::resource('restaurants', RestaurantController::class)->parameters([
-        'restaurants' => 'restaurant:slug'
-    ]); */
-    Route::resource('types', TypeController::class)->except(['show', 'create', 'edit']);
+    
     Route::resource('plates', PlateController::class);
+    Route::resource('restaurants', RestaurantController::class); 
+    Route::resource('types', TypeController::class)->except(['show', 'create', 'edit']);
     Route::resource('order', OrderController::class)->except(['show', 'create', 'edit']);
 });
 
