@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plate;
 use App\Http\Requests\StorePlateRequest;
 use App\Http\Requests\UpdatePlateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PlateController extends Controller
 {
@@ -27,7 +28,7 @@ class PlateController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.plates.create');
     }
 
     /**
@@ -38,7 +39,18 @@ class PlateController extends Controller
      */
     public function store(StorePlateRequest $request)
     {
-        //
+       /* dd($request); */ 
+        $val_data=$request->validated();
+
+        if ($request->hasFile('cover_image')) {
+            $cover_image = Storage::put('uploads', $val_data['cover_image']);
+
+            $val_data['cover_image'] = $cover_image;
+        }
+        $plate=Plate::create($val_data);
+
+        return to_route('admin.plates.index')->with('message', "$plate->name created successfully");
+
     }
 
     /**
@@ -49,7 +61,7 @@ class PlateController extends Controller
      */
     public function show(Plate $plate)
     {
-        //
+        return view('admin.plates.show', compact('plate'));
     }
 
     /**
@@ -60,7 +72,7 @@ class PlateController extends Controller
      */
     public function edit(Plate $plate)
     {
-        //
+        return view('admin.plates.edit', compact('plate'));
     }
 
     /**
@@ -72,7 +84,10 @@ class PlateController extends Controller
      */
     public function update(UpdatePlateRequest $request, Plate $plate)
     {
-        //
+        $val_data = $request->validated();
+        $plate -> update($val_data);
+        return to_route('admin.plates.index')->with('message', "$plate->name update successfully");
+        
     }
 
     /**
@@ -83,6 +98,7 @@ class PlateController extends Controller
      */
     public function destroy(Plate $plate)
     {
-        //
+        $plate->delete();
+        return to_route('admin.plates.index')->with('message', "$plate->name deleted successfully");
     }
 }

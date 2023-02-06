@@ -10,6 +10,7 @@ use App\Models\Restaurant;
 class Type extends Model
 {
     use HasFactory;
+    protected $fillable=['name'];
 
     public function restaurants(): BelongsToMany
     {
