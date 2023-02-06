@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name',100);
             $table->text('description');
             $table->float('price', 5,2);
-            $table->boolean('best_seller');
-            $table->boolean('visible');
+            $table->boolean('best_seller')->nullable();
+            $table->boolean('visible')->nullable();
             $table->string('cover_image');
             $table->timestamps();
         });

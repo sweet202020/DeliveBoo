@@ -12,6 +12,7 @@ use App\Models\Order;
 class Plate extends Model
 {
     use HasFactory;
+    protected $fillable=['name', 'description', 'price', 'best_seller', 'visible', 'cover_image'];
 
     public function restaurants(): BelongsTo
     {
