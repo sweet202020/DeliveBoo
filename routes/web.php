@@ -27,7 +27,9 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
-    Route::resource('plates', PlateController::class);
+    Route::resource('plates', PlateController::class)->parameters([
+        'plates' => 'plate:slug'
+    ]);
     Route::resource('restaurants', RestaurantController::class); 
     Route::resource('types', TypeController::class)->except(['show', 'create', 'edit']);
     Route::resource('order', OrderController::class)->except(['show', 'create', 'edit']);

@@ -2,8 +2,16 @@
 @section('content')
     <section class="plates">
         <div class="container">
-            <a href="{{ route('admin.plates.create') }}"><button class="btn btn-primary">add plate</button> </a>
+            <a href="{{ route('admin.plates.create') }}"><button class="btn btn-primary my-3">+</button> </a>
             <!-- /.btn -->
+            @if (session('message'))
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                    <strong>{{ session('message') }}</strong>
+                </div>
+            @endif
+            {{-- ./message success --}}
 
             <div class="table-responsive">
                 <table class="table table-primary">
@@ -23,26 +31,27 @@
                                 <td scope="row">{{ $plate->id }}</td>
                                 <td>{{ $plate->name }}</td>
                                 <td>{{ $plate->description }}</td>
-                                <td>{{ $plate->cover_image }}</td>
+                                <td><img width="150" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
+                                </td>
                                 <td>{{ $plate->price }}</td>
-                                <td><a href="{{ route('admin.plates.show', $plate->id) }}">show</a>
-                                    <a href="{{ route('admin.plates.edit', $plate->id) }}">edit</a>
+                                <td><a href="{{ route('admin.plates.show', $plate->slug) }}">show</a>
+                                    <a href="{{ route('admin.plates.edit', $plate->slug) }}">edit</a>
                                     <!-- Modal trigger button -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_plate_{{ $plate->id }}">
+                                        data-bs-target="#delete_plate_{{ $plate->slug }}">
                                         Delete
                                     </button>
 
                                     <!-- Modal Body -->
                                     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                    <div class="modal fade" id="delete_plate_{{ $plate->id }}" tabindex="-1"
+                                    <div class="modal fade" id="delete_plate_{{ $plate->slug }}" tabindex="-1"
                                         data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-                                        aria-labelledby="modalnameId_{{ $plate->id }}" aria-hidden="true">
+                                        aria-labelledby="modalnameId_{{ $plate->slug }}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
                                             role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-name" id="modalnameId_{{ $plate->id }}">Delete
+                                                    <h5 class="modal-name" id="modalnameId_{{ $plate->slug }}">Delete
                                                         {{ $plate->name }}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
@@ -53,7 +62,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-sm"
                                                         data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{ route('admin.plates.destroy', $plate->id) }}"
+                                                    <form action="{{ route('admin.plates.destroy', $plate->slug) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')

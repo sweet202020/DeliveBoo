@@ -2,18 +2,18 @@
 @section('content')
     <div class="container">
         <div class="title">
-            <h1>{{ $plate->name }}</h1>
+            <h1><span class="text-uppercase">name: </span>{{ $plate->name }}</h1>
         </div>
-        <div class="image">
+        <div class="image m-3">
             @if ($plate->cover_image)
-                <img src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
+                <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
             @else
                 <div class="placeholder-glow p-5 bg-danger">
                     placeholder
                 </div>
             @endif
         </div>
-        <p>{{ $plate->description }}</p>
+        <p><span class="text-uppercase">description: </span>{{ $plate->description }}</p>
         <div>
             @if ($plate->best_seller)
                 <p>il piatto e' tra i piu' richiesti</p>
