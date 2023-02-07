@@ -71,6 +71,10 @@
                                 <a class="dropdown-item" href="{{ url('admin') }}">{{__('Dashboard')}}</a>
                                 @endif
                                 
+                                @if (!Auth::user()->restaurants)
+                                <a class="dropdown-item" href="{{ url('admin/restaurants/create') }}">{{__('Add Restaurant')}}</a>
+                                @endif
+                            
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

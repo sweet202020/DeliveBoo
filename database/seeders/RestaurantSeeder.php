@@ -6,6 +6,8 @@ use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+
 
 class RestaurantSeeder extends Seeder
 {
@@ -14,19 +16,22 @@ class RestaurantSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 10; $i++) {
+        $restaurants = config('db.restaurants');
+
+        foreach ($restaurants as $restaurant) {
             $new_restaurant = new Restaurant();
-            $new_restaurant->restaurant_name = $faker->word();
-            $new_restaurant->address = $faker->sentence(3);
-            $new_restaurant->suggest = $faker->randomElement([true, false]);
-            $new_restaurant->opening_time = $faker->time();
-            $new_restaurant->delivery_price = $faker->randomNumber(2, 10);
-            // the png is not visible yet! TODO storage link
-            $new_restaurant->cover_image = '/uploads/default.png';
-            $new_restaurant->partita_iva = 'IT38473261263';
+            $new_restaurant->restaurant_name = $restaurant['restaurant_name'];
+            $new_restaurant->slug = Str::slug($new_restaurant->restaurant_name, '-');
+            $new_restaurant->address = $restaurant['address'];
+            $new_restaurant->opening_time = $restaurant['opening_time'];
+            $new_restaurant->delivery_price = $restaurant['delivery_price'];
+            $new_restaurant->cover_image = $restaurant['cover_image'];
+            $new_restaurant->partita_iva = $restaurant['partita_iva'];
+            $new_restaurant->user_id = $restaurant['user_id'];
             $new_restaurant->save();
         }
+       
     }
 }
