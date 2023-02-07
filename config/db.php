@@ -1,22 +1,7 @@
 <?php
 
 return [
-    'users'=>[
-        [
-            'name' => 'Rodrigo',
-            'email' => ' r@example.it',
-            'password' => '$2y$10$CLJSRTn6AvW38T74HNg6oexGXxH4Oz1GpGuTEh0nF4g770OHwwr3a',
-        ],
-        [
-            'name' => 'Alessio',
-            'email' => ' a@example.it',
-            'password' => '$2y$10$CLJSRTn6AvW38T74HNg6oexGXxH4Oz1GpGuTEh0nF4g770OHwwr3a',
-        ], [
-            'name' => 'Mattia',
-            'email' => ' m@example.it',
-            'password' => '$2y$10$CLJSRTn6AvW38T74HNg6oexGXxH4Oz1GpGuTEh0nF4g770OHwwr3a',
-        ]
-    ],
+   
     'restaurants' => [
         [
             'restaurant_name' => 'Pizza & Delizia',
