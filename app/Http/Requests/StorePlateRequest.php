@@ -27,7 +27,7 @@ class StorePlateRequest extends FormRequest
             'name'=>'required|min:3|max:100',
             'description'=>'required|min:3|max:1000',
             'price'=>'required|max:5',
-            'cover_image'=>'required|image|max:5000',
+            'cover_image'=>'image|max:5000',
             'best_seller'=>'boolean',
             'visible'=>'boolean'
            

@@ -39,7 +39,7 @@ class PlateController extends Controller
      */
     public function store(StorePlateRequest $request)
     {
-       /* dd($request); */ 
+      /*  dd($request);  */
         $val_data=$request->validated();
 
         if ($request->hasFile('cover_image')) {
@@ -47,6 +47,8 @@ class PlateController extends Controller
 
             $val_data['cover_image'] = $cover_image;
         }
+        $plate_slug=Plate::createSlug($val_data['name']);
+        $val_data['slug']=$plate_slug;
         $plate=Plate::create($val_data);
 
         return to_route('admin.plates.index')->with('message', "$plate->name created successfully");
@@ -85,6 +87,16 @@ class PlateController extends Controller
     public function update(UpdatePlateRequest $request, Plate $plate)
     {
         $val_data = $request->validated();
+        if ($request->hasFile('cover_image')) {
+            if($plate->cover_image){     
+                Storage::delete($plate->cover_image);
+            }
+            $cover_image = Storage::put('uploads', $val_data['cover_image']);
+
+            $val_data['cover_image'] = $cover_image;
+        }
+        $plate_slug=Plate::createSlug($val_data['name']);
+        $val_data['slug']=$plate_slug;
         $plate -> update($val_data);
         return to_route('admin.plates.index')->with('message', "$plate->name update successfully");
         
@@ -98,6 +110,9 @@ class PlateController extends Controller
      */
     public function destroy(Plate $plate)
     {
+        if ($plate->cover_image) {
+            Storage::delete($plate->cover_image);
+        }
         $plate->delete();
         return to_route('admin.plates.index')->with('message', "$plate->name deleted successfully");
     }
