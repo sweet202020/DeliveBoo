@@ -6,6 +6,7 @@ use App\Models\Plate;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class PlateSeeder extends Seeder
 {
@@ -14,19 +15,21 @@ class PlateSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 20; $i++) {
-            $new_plate = new Plate();
-     
-            $new_plate->name = $faker->word();
-            $new_plate->description = $faker->paragraph();
-            $new_plate->price = $faker->randomFloat(2, 1, 900);
-            $new_plate->best_seller = false;
-            $new_plate->visible = true;
-            // the png is not visible yet! TODO storage link
-            $new_plate->cover_image = '/uploads/default.png';
+        $plates = config('db.plates');
+        foreach($plates as $plate){
+            $new_plate = new Plate(); 
+            $new_plate->name = $plate['name'];
+            $new_plate->slug = Str::slug($new_plate->name, '-');
+            $new_plate->description = $plate['description'];
+            $new_plate->price = $plate['price'];
+            $new_plate->best_seller = $plate['best_seller'];
+            $new_plate->visible = $plate['visible'];
+            $new_plate->restaurant_id = $plate['restaurant_id'];
+            $new_plate->cover_image = $plate['cover_image'];
             $new_plate->save();
         }
+     
     }
 }

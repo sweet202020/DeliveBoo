@@ -26,9 +26,9 @@ class StoreRestaurantRequest extends FormRequest
         return [
             'restaurant_name'=>'required|max:80',
             'address'=>'required|max:100',
-            'opening_time' => 'required|max:50',
-            'delivery_price' =>'required|max:7',
-            'cover_image' => 'required|image|max:300',
+            'opening_time' => 'nullable|max:50',
+            'delivery_price' =>'nullable|max:7',
+            'cover_image' => 'nullable|image|max:300',
             'partita_iva' => 'required|max:20',
             
         ];

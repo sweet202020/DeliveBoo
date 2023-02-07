@@ -10,11 +10,19 @@ use App\Models\Type;
 use App\Models\Plate;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable =['restaurant_name', 'address','suggest', 'opening_time', 'delivery_price', 'cover_image', 'partita_iva' ];
+    protected $fillable =['restaurant_name', 'address','suggest', 'opening_time', 'delivery_price', 'cover_image', 'partita_iva','slug' ];
+
+
+
+    public static function createSlug($input)
+    {
+        return Str::slug($input);
+    }
 
     public function types(): BelongsToMany
     {

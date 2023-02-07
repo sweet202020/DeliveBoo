@@ -14,12 +14,15 @@ class TypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 5; $i++) {
+
+        $types = config('db.types');
+        foreach($types as $type){
             $new_type = new Type();
-            $new_type->name = $faker->word();
+            $new_type->name = $type['name'];
             $new_type->save();
+
         }
     }
 }

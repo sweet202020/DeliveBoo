@@ -8,11 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Restaurant;
 use App\Models\Order;
+use Illuminate\Support\Str;
 
 class Plate extends Model
 {
     use HasFactory;
-    protected $fillable=['name', 'description', 'price', 'best_seller', 'visible', 'cover_image'];
+    protected $fillable=['name', 'description', 'price', 'best_seller', 'visible', 'cover_image', 'slug'];
+
+    public static function createSlug($input)
+    {
+        return Str::slug($input);
+    }
 
     public function restaurants(): BelongsTo
     {

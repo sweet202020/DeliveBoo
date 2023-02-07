@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('slug');
             $table->string('restaurant_name');
             $table->string('address');
-            $table->boolean('suggest');
-            $table->string('opening_time', 50);
-            $table->float('delivery_price', 4,2);
-            $table->string('cover_image');
+            $table->string('opening_time', 50)->nullable();
+            $table->float('delivery_price', 4,2)->nullable();
+            $table->string('cover_image')->nullable();
             $table->string('partita_iva');
             $table->timestamps();
         });

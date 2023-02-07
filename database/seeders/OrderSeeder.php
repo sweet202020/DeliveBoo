@@ -14,15 +14,17 @@ class OrderSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 20; $i++) {
+        $orders = config('db.orders');
+        foreach ($orders as $order) {
             $new_order = new Order();
-            $new_order->price = $faker->randomFloat(2, 1, 1000);
-            $new_order->customer_name = $faker->word();
-            $new_order->delivery_address = $faker->word();
-            $new_order->phone_number = '3278983721' /* $faker->randomElements(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], 10) */;
+            $new_order->price = $order['price'];
+            $new_order->customer_name = $order['customer_name'];
+            $new_order->delivery_address = $order['delivery_address'];
+            $new_order->phone_number = $order['phone_number'];
             $new_order->save();
         }
+       
     }
 }
