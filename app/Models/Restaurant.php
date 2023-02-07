@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Restaurant extends Model
 {
     use HasFactory;
+    protected $fillable =['restaurant_name', 'address','suggest', 'opening_time', 'delivery_price', 'cover_image', 'partita_iva' ];
 
     public function types(): BelongsToMany
     {
