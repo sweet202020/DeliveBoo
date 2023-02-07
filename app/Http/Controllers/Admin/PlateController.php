@@ -7,6 +7,7 @@ use App\Models\Plate;
 use App\Http\Requests\StorePlateRequest;
 use App\Http\Requests\UpdatePlateRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PlateController extends Controller
 {
@@ -17,7 +18,7 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates=Plate::orderByDesc('id')->get();
+        $plates = Auth::user()->restaurants->plates;
         return view('admin.plates.index', compact('plates'));
     }
 
@@ -44,11 +45,12 @@ class PlateController extends Controller
 
         if ($request->hasFile('cover_image')) {
             $cover_image = Storage::put('uploads', $val_data['cover_image']);
-
             $val_data['cover_image'] = $cover_image;
         }
+
         $plate_slug=Plate::createSlug($val_data['name']);
         $val_data['slug']=$plate_slug;
+        $val_data['restaurant_id'] = Auth::id();
         $plate=Plate::create($val_data);
 
         return to_route('admin.plates.index')->with('message', "$plate->name created successfully");
@@ -63,7 +65,10 @@ class PlateController extends Controller
      */
     public function show(Plate $plate)
     {
-        return view('admin.plates.show', compact('plate'));
+        if(Auth::id() == $plate['restaurant_id']){
+            return view('admin.plates.show', compact('plate'));
+        }
+        return redirect()->route('admin.plates.index')->with('message', "Page Not Found - 404");
     }
 
     /**
@@ -74,7 +79,10 @@ class PlateController extends Controller
      */
     public function edit(Plate $plate)
     {
+        if(Auth::id() == $plate['restaurant_id']){
         return view('admin.plates.edit', compact('plate'));
+        }
+        return redirect()->route('admin.plates.index')->with('message', "Page Not Found - 404");
     }
 
     /**

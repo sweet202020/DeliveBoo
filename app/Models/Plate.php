@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class Plate extends Model
 {
     use HasFactory;
-    protected $fillable=['name', 'description', 'price', 'best_seller', 'visible', 'cover_image', 'slug'];
+    protected $fillable=['name', 'description', 'price', 'best_seller', 'visible', 'cover_image', 'slug', 'restaurant_id'];
 
     public static function createSlug($input)
     {
