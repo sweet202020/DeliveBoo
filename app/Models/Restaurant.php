@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable =['restaurant_name', 'address','suggest', 'opening_time', 'delivery_price', 'cover_image', 'partita_iva','slug' ];
+    protected $fillable =['restaurant_name', 'address', 'opening_time', 'delivery_price', 'cover_image', 'partita_iva','slug','user_id'];
 
 
 

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Type;
 
 class RestaurantController extends Controller
 {
@@ -28,7 +29,11 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+        if(Auth::user()->restaurants){
+            return redirect()->route('admin.dashboard')->with('message', "Restaurant profile already existing.");
+        }
+        $types = Type::all();
+        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
@@ -44,16 +49,15 @@ class RestaurantController extends Controller
             $img_path = Storage::disk('public')->put('restaurant_images', $request['cover_image']);
             $val_data['cover_image'] =   $img_path;
         }
-
-
+        $slug_data = Restaurant::createSlug($val_data['restaurant_name']);
+        $val_data['slug'] =  $slug_data;
         $val_data['user_id'] = Auth::id();
+        $restaurant = Restaurant::create($val_data);
+        if ($request->has('types')) {
+            $restaurant->types()->attach($val_data['types']);
+        }
 
-        $restaurant_details = Restaurant::create($val_data);
-        // if ($request->has('types')) {
-        //     $project->types()->attach($val_data['types']);
-        // }
-
-        return redirect()->route('admin.dashboard')->with('message', "$restaurant_details->restaurant_name add successfully");
+        return redirect()->route('admin.dashboard')->with('message', "$restaurant->restaurant_name add successfully");
     }
 
     /**
@@ -75,7 +79,12 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        if(Auth::id() === $restaurant['user_id']){
+            $types = Type::all();
+            return view('admin.restaurants.edit', compact('restaurant','types')); 
+        }
+        
+        return redirect()->route('admin.dashboard')->with('message', "Page not found - 404");
     }
 
     /**
@@ -87,7 +96,26 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $val_data = $request->validated();
+        if ($request['cover_image']){
+            if($restaurant['cover_image']){
+                Storage::disk('public')->delete($restaurant->cover_image);
+            }
+            $img_path = Storage::disk('public')->put('restaurant_images', $request['cover_image']);
+            $val_data['cover_image'] =  $img_path;
+        }
+
+        $slug_data = Restaurant::createSlug($val_data['title']);
+        $val_data['slug'] =  $slug_data;
+        $restaurant->update($val_data);
+        
+        if ($request->has('types')) {
+            $restaurant->types()->sync($val_data['types']);
+        } else {
+            $restaurant->types()->sync([]);
+        }
+
+        return redirect()->route('admin.dashboard')->with('message', "$restaurant->restaurant_name add successfully");
     }
 
     /**

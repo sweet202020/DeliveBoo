@@ -20,7 +20,7 @@ return new class extends Migration
 	        $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->cascadeonDelete();
 
-            $table->primary('restaurant_id', 'type_id');
+            // $table->primary('restaurant_id', 'type_id');
         });
     }
 
