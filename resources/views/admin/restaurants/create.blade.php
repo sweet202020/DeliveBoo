@@ -51,20 +51,22 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <!-- type -->
+        <!-- types -->
         <div class="mb-3">
-            <label for="partita_iva" class="form-label">type</label>
-            <select name="type" id="type" class="form-control @error('partita_iva') is-invalid @enderror" value="{{old('type')}}">
-                @foreach($types as $type)
-                <option value="type">
-                    {{$type}}
-                </option>
-                @endforeach
+            <label for="types" class="form-label">Types</label>
+            <select multiple class="form-select form-select-lg"  name="types[]" id="types">
+                <option value="" disabled>Select one</option>
+                @forelse($types as $type)
+                <option value="{{$type->id}}"{{in_array($type->id, old('types', [])) ? 'selected' : ''}} >{{$type->name}}</option>
+                @empty
+                <h6>Sorry.No technologies inside the database yet.</h6> 
+                @endforelse
             </select>
         </div>
-        @error('type')
+        @error('types')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
 
         <!-- image -->
         <div class="form-group mb-3">
