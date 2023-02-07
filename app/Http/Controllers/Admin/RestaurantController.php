@@ -29,6 +29,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->restaurants){
+            return redirect()->route('admin.dashboard')->with('message', "Restaurant profile already existing.");
+        }
         $types = Type::all();
         return view('admin.restaurants.create', compact('types'));
     }
@@ -76,9 +79,12 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        if(Auth::id() === $restaurant['user_id']){
+            $types = Type::all();
+            return view('admin.restaurants.edit', compact('restaurant','types')); 
+        }
         
-        $types = Type::all();
-        return view('admin.restaurants.edit', compact('restaurant','types'));
+        return redirect()->route('admin.dashboard')->with('message', "Page not found - 404");
     }
 
     /**
