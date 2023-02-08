@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     <section class="plates">
         <div class="container">
@@ -12,6 +12,13 @@
                 </div>
             @endif
             {{-- ./message success --}}
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                <strong>{{ session('error') }}</strong>
+            </div>
+        @endif
 
             <div class="table-responsive">
                 <table class="table table-primary">
@@ -34,8 +41,8 @@
                                 <td><img width="150" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
                                 </td>
                                 <td>{{ $plate->price }}</td>
-                                <td><a href="{{ route('admin.plates.show', $plate->slug) }}">show</a>
-                                    <a href="{{ route('admin.plates.edit', $plate->slug) }}">edit</a>
+                                <td><a href="{{ route('admin.plates.show', $plate->slug) }}" class="btn btn-primary">show</a>
+                                    <a href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-secondary">edit</a>
                                     <!-- Modal trigger button -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete_plate_{{ $plate->slug }}">

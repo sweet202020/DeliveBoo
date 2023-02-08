@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     <form action="{{ route('admin.plates.store') }}" method="POST" enctype="multipart/form-data">
         @csrf

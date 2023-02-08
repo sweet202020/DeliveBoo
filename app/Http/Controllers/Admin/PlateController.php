@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plate;
 use App\Http\Requests\StorePlateRequest;
 use App\Http\Requests\UpdatePlateRequest;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,7 +56,7 @@ class PlateController extends Controller
         }
         $plate_slug=Plate::createSlug($val_data['name']);
         $val_data['slug']=$plate_slug;
-        $val_data['restaurant_id'] = Auth::id();
+        $val_data['restaurant_id'] = Auth::User()->restaurants['id'];
         $plate=Plate::create($val_data);
 
         return to_route('admin.plates.index')->with('message', "$plate->name created successfully");
@@ -70,10 +71,10 @@ class PlateController extends Controller
      */
     public function show(Plate $plate)
     {
-        if(Auth::id() == $plate['restaurant_id']){
+        if(Auth::user()->restaurants['id'] == $plate['restaurant_id']){
             return view('admin.plates.show', compact('plate'));
         }
-        return redirect()->route('admin.plates.index')->with('message', "Page Not Found - 404");
+        return redirect()->route('admin.plates.index')->with('error', "Page Not Found - 404");
     }
 
     /**
@@ -84,10 +85,10 @@ class PlateController extends Controller
      */
     public function edit(Plate $plate)
     {
-        if(Auth::id() == $plate['restaurant_id']){
+        if(Auth::user()->restaurants['id'] == $plate['restaurant_id']){
         return view('admin.plates.edit', compact('plate'));
         }
-        return redirect()->route('admin.plates.index')->with('message', "Page Not Found - 404");
+        return redirect()->route('admin.plates.index')->with('error', "Page Not Found - 404");
     }
 
     /**
