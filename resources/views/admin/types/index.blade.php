@@ -1,21 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
-    <div class="container">
+    <div class="container pt-5">
 
         <div class="row">
             <div class="col">
                 <form action="{{ route('admin.types.store') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">aggiungi una tipologia di cucina</label>
+                        <label for="name" class="form-label">Aggiungi una tipologia di cucina</label>
                         <input type="text" name="name" id="name" class="form-control"
-                            placeholder="inserisic il tipo" aria-describedby="helpId">
+                            placeholder="Inserisci il tipo" aria-describedby="helpId">
                     </div>
-                    <button type="submit">add new type</button>
+                    <button class="btn btn-primary" type="submit">Add new type</button>
                 </form>
             </div>
             <!-- /.col -->
             <div class="col">
+                <div class="card shadows-sm p-3">
+                    <h4>Restaurant Types</h4>
                 <table class="table table-striped table-inverse table-responsive">
                     <thead class="thead-inverse">
                         <tr>
@@ -86,6 +88,7 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
             </div>
             <!-- /.col -->
         </div>
