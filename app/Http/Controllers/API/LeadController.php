@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {
@@ -35,4 +37,10 @@ class LeadController extends Controller
             'success' => true
         ]);
     }
+    public function index()
+    {
+       /*  $orders=  Auth::user()->restaurants->plates->orders */;
+        return view('api.orders.index'/* , compact('orders') */);
+    }
+
 }
