@@ -72,8 +72,8 @@
                         </li>
                         <li class="nav-item">
                             @if (Auth::user()->restaurants && Auth::id() != 1)
-                                <a class="nav-link {{ Route::currentRouteName() === 'api.orders.index' ? 'active' : '' }}"
-                                    href="{{ url('api/my-orders') }}">{{ __('Orders') }}</a>
+                                <a class="nav-link {{ Route::currentRouteName() === 'admin.orders.index' ? 'active' : '' }}"
+                                    href="{{ url('admin/orders') }}">{{ __('Orders') }}</a>
                             @endif
                         </li>
                         <li class="nav-item">

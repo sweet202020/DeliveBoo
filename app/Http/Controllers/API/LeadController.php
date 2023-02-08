@@ -37,10 +37,6 @@ class LeadController extends Controller
             'success' => true
         ]);
     }
-    public function index()
-    {
-       /*  $orders=  Auth::user()->restaurants->plates->orders */;
-        return view('api.orders.index'/* , compact('orders') */);
-    }
+ 
 
 }

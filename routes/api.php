@@ -22,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // route for basket order
 
+//SARANNO DA APRIRE LE ROTTE PER FAR VISUALIZZARE ALLA PARTE FRONT I PIATTI E RISTORANTI 
 Route::post('/orders', [LeadController::class, 'store']);
-Route::get('/my-orders', [LeadController::class, 'index']);
+
