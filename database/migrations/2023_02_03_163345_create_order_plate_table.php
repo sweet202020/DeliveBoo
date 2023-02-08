@@ -22,7 +22,6 @@ return new class extends Migration
 
             $table->integer('plate_quantity');
 
-            $table->primary('order_id', 'plate_id');
         });
     }
 
