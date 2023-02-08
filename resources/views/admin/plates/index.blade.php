@@ -21,7 +21,7 @@
         @endif
 
             <div class="table-responsive">
-                <table class="table table-primary">
+                <table class="table table-primary align-middle">
                     <thead>
                         <tr>
                             <th scope="col">id</th>
