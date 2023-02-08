@@ -80,7 +80,7 @@
                         @endif
                         </li>
                         <li class="nav-item">
-                            @if (Auth::user()->restaurants)
+                            @if (Auth::user()->restaurants && Auth::id() != 1)
                             <a class="nav-link {{ Route::currentRouteName() === 'admin.restaurants.edit' ? 'active' : '' }}"
                                 href="{{ route('admin.restaurants.edit', Auth::user()->restaurants['slug']) }}">{{ __('Restaurant Info') }}</a>
                         @endif
