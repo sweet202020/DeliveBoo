@@ -40,14 +40,19 @@ class PlateController extends Controller
      */
     public function store(StorePlateRequest $request)
     {
-      /*  dd($request);  */
+       /* dd($request);  */
         $val_data=$request->validated();
 
         if ($request->hasFile('cover_image')) {
             $cover_image = Storage::put('uploads', $val_data['cover_image']);
             $val_data['cover_image'] = $cover_image;
         }
-
+        if(!isset($val_data['best_seller'])){
+            $val_data['best_seller']=0;
+        }
+        if(!isset($val_data['visible'])){
+            $val_data['visible']=0;
+        }
         $plate_slug=Plate::createSlug($val_data['name']);
         $val_data['slug']=$plate_slug;
         $val_data['restaurant_id'] = Auth::id();
@@ -102,6 +107,12 @@ class PlateController extends Controller
             $cover_image = Storage::put('uploads', $val_data['cover_image']);
 
             $val_data['cover_image'] = $cover_image;
+        }
+        if(!isset($val_data['best_seller'])){
+            $val_data['best_seller']=0;
+        }
+        if(!isset($val_data['visible'])){
+            $val_data['visible']=0;
         }
         $plate_slug=Plate::createSlug($val_data['name']);
         $val_data['slug']=$plate_slug;
