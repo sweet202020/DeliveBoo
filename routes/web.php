@@ -26,12 +26,12 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    
+
 
     Route::resource('plates', PlateController::class)->parameters([
         'plates' => 'plate:slug'
     ]);
-    
+
     Route::resource('restaurants', RestaurantController::class)->parameters([
         'restaurants' => 'restaurant:slug'
     ])->except(['index', 'show', 'destroy']);
@@ -40,4 +40,4 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('order', OrderController::class)->except(['show', 'create', 'edit']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
