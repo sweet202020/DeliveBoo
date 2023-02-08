@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Type;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -16,8 +17,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types=Type::orderByDesc('id')->get();
-        return view('admin.types.index', compact('types'));
+        if (Auth::id() === 1) {
+            $types = Type::orderByDesc('id')->get();
+            return view('admin.types.index', compact('types'));
+        }
+        return to_route('admin.dashboard')->with('message', 'Page not found');
     }
 
     /**
@@ -27,8 +31,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('admin.types.index');
-        
+        //
     }
 
     /**
@@ -39,9 +42,12 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        $val_data=$request->validated();
-        Type::create($val_data);
-        return to_route('admin.types.index');
+        if (Auth::id() === 1) {
+            $val_data = $request->validated();
+            Type::create($val_data);
+            return to_route('admin.types.index')->with('message', 'Type created successfully');
+        }
+        return to_route('admin.dashboard')->with('message', 'Page not found');
     }
 
     /**
@@ -75,9 +81,12 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        $val_data=$request->validated();
-        $type->update($val_data);
-        return to_route('admin.types.index');
+        if (Auth::id() === 1) {
+            $val_data = $request->validated();
+            $type->update($val_data);
+            return to_route('admin.types.index')->with('message', "$type->name updated successfully");
+        }
+        return to_route('admin.dashboard')->with('message', 'Page not found');
     }
 
     /**
@@ -88,7 +97,10 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
-        return to_route('admin.types.index');
+        if (Auth::id() === 1) {
+            $type->delete();
+            return to_route('admin.types.index')->with('message', "$type->name deleted successfully");
+        }
+        return to_route('admin.dashboard')->with('message', 'Page not found');
     }
 }
