@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // route for basket order
 
 Route::post('/orders', [LeadController::class, 'store']);
+Route::get('/my-orders', [LeadController::class, 'index']);
