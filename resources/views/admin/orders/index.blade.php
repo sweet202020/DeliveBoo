@@ -9,6 +9,7 @@
                     <th scope="col">Delivery Address</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Plates Name</th>
+                    <th scope="col">Ordering Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,7 @@
                                 no plate to show
                             @endforelse
                         </td>
+                        <td>{{ $order->created_at }}</td>
                     </tr>
                 @empty
                     <tr>

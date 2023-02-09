@@ -29,7 +29,8 @@ class UpdatePlateRequest extends FormRequest
             'price'=>'required|max:5',
             'cover_image'=>'max:100',
             'best_seller'=>'boolean',
-            'visible'=>'boolean'
+            'visible'=>'boolean',
+            'category_id'=>'nullable|exists:categories,id'
         ];
     }
 }

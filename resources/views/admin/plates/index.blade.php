@@ -13,12 +13,12 @@
             @endif
             {{-- ./message success --}}
             @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-                <strong>{{ session('error') }}</strong>
-            </div>
-        @endif
+                    <strong>{{ session('error') }}</strong>
+                </div>
+            @endif
 
             <div class="table-responsive">
                 <table class="table table-primary align-middle">
@@ -38,11 +38,21 @@
                                 <td scope="row">{{ $plate->id }}</td>
                                 <td>{{ $plate->name }}</td>
                                 <td>{{ $plate->description }}</td>
-                                <td><img width="150" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
+                                <td>
+                                    @if ($plate->cover_image)
+                                        <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}"
+                                            alt="">
+                                    @else
+                                        <div class="placeholder-glow py-3 bg-danger text-center">
+                                            placeholder
+                                        </div>
+                                    @endif
                                 </td>
-                                <td>{{ $plate->price }}</td>
-                                <td><a href="{{ route('admin.plates.show', $plate->slug) }}" class="btn btn-primary">show</a>
-                                    <a href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-secondary">edit</a>
+                                <td>{{ $plate->price . '€' }}</td>
+                                <td><a href="{{ route('admin.plates.show', $plate->slug) }}"
+                                        class="btn btn-primary">show</a>
+                                    <a
+                                        href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-secondary">edit</a>
                                     <!-- Modal trigger button -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete_plate_{{ $plate->slug }}">
