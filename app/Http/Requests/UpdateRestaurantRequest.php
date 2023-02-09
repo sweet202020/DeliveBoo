@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use function PHPSTORM_META\type;
+
 class UpdateRestaurantRequest extends FormRequest
 {
     /**
@@ -30,6 +32,7 @@ class UpdateRestaurantRequest extends FormRequest
             'delivery_price' =>'nullable|max:7',
             'cover_image' => 'nullable|image|max:300',
             'partita_iva' => 'required|max:20',
+            'types'  => 'exists:types,id'
         ];
     }
 }

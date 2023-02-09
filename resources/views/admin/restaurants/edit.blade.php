@@ -2,10 +2,15 @@
 
 @section('content')
     <div class="container m-auto py-3">
+        @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
         <h1 class="mb-3">Restaurant Info</h1>
-        <form action="{{ route('admin.restaurants.store', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.restaurants.update', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
-
+            @method('PUT')
             <!-- name -->
             <div class="mb-3">
                 <label for="restaurant_name" class="form-label">Name</label>
