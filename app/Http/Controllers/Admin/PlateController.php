@@ -20,6 +20,7 @@ class PlateController extends Controller
     public function index()
     {
         $plates = Auth::user()->restaurants->plates;
+        
         return view('admin.plates.index', compact('plates'));
     }
 

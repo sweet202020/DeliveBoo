@@ -17,10 +17,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        
+        $ordini = []; //array con tutti gli ordini dell'utente
         $orders = Order::all();
-        // dd($orders);
-        return view('admin.orders.index', compact('orders'));
+        foreach ($orders as $order){
+            foreach($order->plates as $singlePlate){
+                if($singlePlate['restaurant_id'] == Auth::id()){
+            if(!in_array($order, $ordini))
+                        array_push($ordini, $order);
+                }
+            }
+        }
+        return view('admin.orders.index', compact('ordini'));
+        
     }
 
     /**
