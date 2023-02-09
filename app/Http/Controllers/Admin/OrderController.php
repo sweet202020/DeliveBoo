@@ -22,10 +22,10 @@ class OrderController extends Controller
         foreach ($orders as $order){
             foreach($order->plates as $singlePlate){
                 if($singlePlate['restaurant_id'] == Auth::id()){
-            if(!in_array($order, $order_array))
+                    if(!in_array($order, $order_array)){
                         array_push($order_array, $order);
-                }
-            }
+                     }
+            }}
         }
         return view('admin.orders.index', compact('order_array'));
         
