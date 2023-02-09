@@ -7,6 +7,11 @@
             {{ session('message') }}
         </div>
     @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
         <h1 class="mb-3">Restaurant Info</h1>
         <form action="{{ route('admin.restaurants.update', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
             @csrf

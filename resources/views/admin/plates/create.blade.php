@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 @section('content')
+<a class="btn btn-primary" href="{{ route('admin.plates.index') }}" role="button"><i
+    class="fas fa-angle-left fa-fw"></i></a>
     <form action="{{ route('admin.plates.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container">
@@ -80,7 +82,7 @@
 
             <p>* Required fields</p>
 
-            <button type="submit">add plate</button>
+            <button type="submit" class="btn btn-primary">add plate</button>
 
 
 
