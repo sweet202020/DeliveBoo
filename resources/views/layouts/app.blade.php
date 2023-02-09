@@ -89,6 +89,10 @@
                                         <a class="dropdown-item"
                                             href="{{ url('admin/restaurants/create') }}">{{ __('Add Restaurant') }}</a>
                                     @endif
+                                    @if (Auth::user()->restaurants)
+                                        <a class="dropdown-item"
+                                            href="{{ route('admin.restaurants.edit', Auth::user()->restaurants['slug']) }}"href="{{ route('admin.restaurants.edit', Auth::user()->restaurants['slug']) }}">{{ __(' Restaurant Info') }}</a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
