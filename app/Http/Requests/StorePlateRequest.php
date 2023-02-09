@@ -29,7 +29,8 @@ class StorePlateRequest extends FormRequest
             'price'=>'required|max:5',
             'cover_image'=>'image|max:5000',
             'best_seller'=>'boolean',
-            'visible'=>'boolean'
+            'visible'=>'boolean',
+            'category_id'=>'nullable|exists:categories,id'
            
         ];
     }

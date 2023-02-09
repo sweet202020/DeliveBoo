@@ -64,6 +64,20 @@
 
             {{-- ./cover image --}}
 
+            <div class="mb-3">
+                <label for="category_id" class="form-label">category</label>
+                <select class="form-select form-select-lg @error('category_id') is-invalid @enderror" name="category_id"
+                    id="category_id">
+                    <option selected value=''>Select one</option>
+                    @forelse ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>
+                            {{ $category->name }}</option>
+                    @empty
+                        <h6>Sorry.No categories inside the database yet.</h6>
+                    @endforelse
+                </select>
+            </div>
+
             <p>* Required fields</p>
 
             <button type="submit">add plate</button>

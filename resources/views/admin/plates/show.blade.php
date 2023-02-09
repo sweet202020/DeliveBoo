@@ -21,10 +21,15 @@
                 <p>il piatto non e' tra i piu' richiesti</p>
             @endif
         </div>
-        @if ($plate->visible)
-            <p>il piatto e' disponibile</p>
-        @else
-            <p>il piatto non e' disponibile</p>
-        @endif
+        <div>
+            @if ($plate->visible)
+                <p>il piatto e' disponibile</p>
+            @else
+                <p>il piatto non e' disponibile</p>
+            @endif
+        </div>
+        <div>
+            <h6>Category: {{ $plate->category ? $plate->category->name : 'Uncategorized' }}</h6>
+        </div>
     </div>
 @endsection

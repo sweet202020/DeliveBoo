@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plate;
 use App\Http\Requests\StorePlateRequest;
 use App\Http\Requests\UpdatePlateRequest;
+use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,8 @@ class PlateController extends Controller
      */
     public function create()
     {
-        return view('admin.plates.create');
+        $categories=Category::all();
+        return view('admin.plates.create', compact('categories'));
     }
 
     /**
@@ -42,7 +44,7 @@ class PlateController extends Controller
      */
     public function store(StorePlateRequest $request)
     {
-       /* dd($request);  */
+        /* dd($request); */ 
         $val_data=$request->validated();
 
         if ($request->hasFile('cover_image')) {
@@ -86,10 +88,11 @@ class PlateController extends Controller
      */
     public function edit(Plate $plate)
     {
+        $categories=Category::all();
         if(Auth::user()->restaurants['id'] == $plate['restaurant_id']){
-        return view('admin.plates.edit', compact('plate'));
+        return view('admin.plates.edit', compact('plate', 'categories'));
         }
-        return redirect()->route('admin.plates.index')->with('error', "Page Not Found - 404");
+        return redirect()->route('admin.plates.index', compact('categories'))->with('error', "Page Not Found - 404");
     }
 
     /**
