@@ -1,9 +1,37 @@
 @extends('layouts.admin')
 @section('content')
-@foreach ($ordini as $order)
-    <h1>{{$order->customer_name}}</h1>
-    @foreach ($order->plates as $singleplate )
-        <h1>{{$singleplate->name}}</h1>
-    @endforeach
-    @endforeach
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Delivery Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Plates Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($order_array as $order)
+                    <tr class="">
+                        <td scope="row">{{ $order->customer_name }}</td>
+                        <td>{{ $order->price . '€' }}</td>
+                        <td>{{ $order->delivery_address }}</td>
+                        <td>{{ $order->phone_number }}</td>
+                        <td>
+                            @forelse ($order->plates as $singleplate)
+                                {{ $singleplate->name }}{{ $singleplate->price . '€' . ' | ' }}
+                            @empty
+                                no plate to show
+                            @endforelse
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td>no orders</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 @endsection
