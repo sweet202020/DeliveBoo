@@ -21,7 +21,7 @@ class OrderController extends Controller
         $orders = Order::all();
         foreach ($orders as $order){
             foreach($order->plates as $singlePlate){
-                if($singlePlate['restaurant_id'] == Auth::id()){
+                if( Auth::user()->restaurants['id'] == $singlePlate['restaurant_id']){
                     if(!in_array($order, $order_array)){
                         array_push($order_array, $order);
                      }
