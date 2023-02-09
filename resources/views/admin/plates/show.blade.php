@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
+        <a class="btn btn-primary" href="{{ route('admin.plates.index') }}" role="button"><i
+            class="fas fa-angle-left fa-fw"></i></a>
         <div class="title">
             <h1><span class="text-uppercase">name: </span>{{ $plate->name }}</h1>
         </div>

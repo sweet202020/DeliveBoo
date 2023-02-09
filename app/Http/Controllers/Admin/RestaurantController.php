@@ -30,7 +30,8 @@ class RestaurantController extends Controller
     public function create()
     {
         if(Auth::user()->restaurants){
-            return redirect()->route('admin.dashboard')->with('message', "Restaurant profile already existing.");
+            $restaurant = Restaurant::find(Auth::id());
+            return redirect()->route('admin.restaurants.edit', compact('restaurant'))->with('error', "Restaurant profile already existing.");
         }
         $types = Type::all();
         return view('admin.restaurants.create', compact('types'));
