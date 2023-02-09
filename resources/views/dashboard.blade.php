@@ -2,11 +2,16 @@
 
 @section('content')
     <div class="container pt-3">
-        @if (session('message'))
+        @if (session('error'))
             <div class="alert alert-danger">
-                {{ session('message') }}
+                {{ session('error') }}
             </div>
         @endif
+        @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

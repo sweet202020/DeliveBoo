@@ -105,7 +105,7 @@ class RestaurantController extends Controller
             $val_data['cover_image'] =  $img_path;
         }
 
-        $slug_data = Restaurant::createSlug($val_data['title']);
+        $slug_data = Restaurant::createSlug($val_data['restaurant_name']);
         $val_data['slug'] =  $slug_data;
         $restaurant->update($val_data);
         
@@ -115,7 +115,7 @@ class RestaurantController extends Controller
             $restaurant->types()->sync([]);
         }
 
-        return redirect()->route('admin.dashboard')->with('message', "$restaurant->restaurant_name add successfully");
+        return redirect()->route('admin.restaurants.edit', compact('restaurant'))->with('message', "$restaurant->restaurant_name update successfully");
     }
 
     /**
