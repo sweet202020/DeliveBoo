@@ -100,6 +100,7 @@
                         </tr>
                     </tbody>
                 </table>
+                {{$plates->links('vendor.pagination.bootstrap-5')}}
             </div>
         </div>
         <!-- /.container -->

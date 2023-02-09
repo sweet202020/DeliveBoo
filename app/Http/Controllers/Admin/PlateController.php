@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class PlateController extends Controller
 {
@@ -20,7 +21,7 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates = Auth::user()->restaurants->plates;
+        $plates = Auth::user()->restaurants->plates()->paginate(5);
         
         return view('admin.plates.index', compact('plates'));
     }
