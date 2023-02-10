@@ -2,7 +2,9 @@
 @section('content')
     <section class="plates">
         <div class="container">
-            <a href="{{ route('admin.plates.create') }}"><button class="btn btn-primary my-3">+</button> </a>
+
+            <a href="{{ route('admin.plates.create') }}"><button class="btn btn-outline-warning my-3">add plate +</button>
+            </a>
             <!-- /.btn -->
             @if (session('message'))
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -40,21 +42,22 @@
                                 <td>{{ $plate->description }}</td>
                                 <td>
                                     @if ($plate->cover_image)
-                                        <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}"
-                                            alt="">
+                                        <img src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
                                     @else
-                                        <div class="placeholder-glow py-3 bg-danger text-center">
-                                            placeholder
+                                        <div class="placeholder-glow  text-center position-relative">
+                                            <div class="position-absolute">
+                                                placeholder
+                                            </div>
                                         </div>
                                     @endif
                                 </td>
                                 <td>{{ $plate->price . '€' }}</td>
                                 <td><a href="{{ route('admin.plates.show', $plate->slug) }}"
-                                        class="btn btn-primary">show</a>
+                                        class="btn btn-outline-warning">show</a>
                                     <a
-                                        href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-secondary">edit</a>
+                                        href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-outline-info">edit</a>
                                     <!-- Modal trigger button -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete_plate_{{ $plate->slug }}">
                                         Delete
                                     </button>
@@ -106,4 +109,43 @@
         <!-- /.container -->
 
     </section>
+    <style scoped>
+        .plates {
+            background-image: url('/img/sfondo.jpeg');
+            background-size: cover
+        }
+
+        .container {
+            font-family: "Unbounded", cursive;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .placeholder-glow {
+            background-color: rgb(107, 190, 107);
+            width: 200px;
+            height: 200px;
+            text-align: center;
+        }
+
+        .position-absolute {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-transform: uppercase;
+        }
+
+        .btn-outline-warning {
+            background-color: #f5612c;
+        }
+
+        tr {
+            --bs-table-bg: #ff9e45;
+            --bs-table-border-color: black;
+        }
+    </style>
 @endsection

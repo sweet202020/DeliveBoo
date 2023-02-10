@@ -55,7 +55,7 @@
             </div>
         </header>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+        <main class="col-md-9 ms-sm-auto col-lg-10">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
@@ -92,9 +92,9 @@
                         <li class="nav-item">
 
                             @if (Auth::user()->restaurants && Auth::id() != 1)
-                            <a class="nav-link {{ Route::currentRouteName() === 'admin.restaurants.edit' ? 'active' : '' }}"
-                                href="{{ route('admin.restaurants.edit', Auth::user()->restaurants['slug']) }}">{{ __('Restaurant Info') }}</a>
-                        @endif
+                                <a class="nav-link {{ Route::currentRouteName() === 'admin.restaurants.edit' ? 'active' : '' }}"
+                                    href="{{ route('admin.restaurants.edit', Auth::user()->restaurants['slug']) }}">{{ __('Restaurant Info') }}</a>
+                            @endif
 
                         </li>
                     </ul>
