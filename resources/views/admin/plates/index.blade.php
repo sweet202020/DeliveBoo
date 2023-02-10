@@ -142,7 +142,7 @@
             background-color: #f5612c;
         }
 
-        tr {
+        .table-primary {
             --bs-table-bg: #ff9e45;
             --bs-table-border-color: black;
         }
