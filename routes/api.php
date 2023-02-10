@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LeadController;
+use App\Http\Controllers\API\RestaurantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// route for basket order
+
 
 //SARANNO DA APRIRE LE ROTTE PER FAR VISUALIZZARE ALLA PARTE FRONT I PIATTI E RISTORANTI 
 Route::post('/orders', [LeadController::class, 'store']);
 
+// Route for restaurants API
+Route::post('/restaurants', [RestaurantController::class, 'index']);
+Route::post('/restaurants/{restaurant:slug}', [RestaurantController::class, 'show']);
