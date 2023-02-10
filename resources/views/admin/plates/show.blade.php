@@ -37,12 +37,13 @@
                 </div>
             </div>
             <div class="d-flex">
-                <button class="btn btn-primary m-3">
-                    <a class="text-white" href="{{ route('admin.plates.edit', $plate->slug) }}">edit
-                        plate</a>
+                <button class="my_btn m-3">
+                    <a class="my_btn " href="{{ route('admin.plates.index') }}" role="button"><i
+                            class="fas fa-angle-left fa-fw"></i></a>
                 </button>
-                <button class="btn btn-primary m-3">
-                    <a class="text-white" href="{{ route('admin.plates.index', $plate->slug) }}">go back</a>
+                <button class="my_btn m-3">
+                    <a href="{{ route('admin.plates.edit', $plate->slug) }}">edit
+                        plate</a>
                 </button>
             </div>
         </div>

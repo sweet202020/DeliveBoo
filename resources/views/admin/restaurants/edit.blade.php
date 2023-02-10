@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container m-auto py-3">
+    <form action="{{ route('admin.restaurants.update', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
         @if (session('message'))
-            <div class="alert alert-success">
+            <div class="alert alert-success ms-5 me-5">
                 {{ session('message') }}
             </div>
         @endif
@@ -12,8 +12,8 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h1 class="mb-3">Restaurant Info</h1>
-        <form action="{{ route('admin.restaurants.update', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
+        <div class="container m-auto py-3">
+            <h1 class="mb-3">Restaurant Info</h1>
             @csrf
             @method('PUT')
             <!-- name -->
@@ -138,6 +138,19 @@
             <button type="submit" class="btn btn-primary">Send</button>
 
 
-        </form>
-    </div>
+        </div>
+    </form>
+    <style>
+        form {
+            padding: 10rem 0;
+            background-image: url('/img/sfondo.jpeg');
+            background-size: cover
+        }
+
+        .container {
+            background-color: #ff9e45;
+            padding: 1rem;
+            border-radius: 2rem
+        }
+    </style>
 @endsection

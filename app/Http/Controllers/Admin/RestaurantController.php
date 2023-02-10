@@ -73,7 +73,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+       /*  return view('dashboard', compact('restaurant')); */
     }
 
     /**
