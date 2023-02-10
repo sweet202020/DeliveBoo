@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
-<a class="btn btn-primary" href="{{ route('admin.plates.index') }}" role="button"><i
-    class="fas fa-angle-left fa-fw"></i></a>
     <form action="{{ route('admin.plates.update', $plate->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="container">
+            <a class="my_btn " href="{{ route('admin.plates.index') }}" role="button"><i
+                    class="fas fa-angle-left fa-fw"></i></a>
             <h1 class="text-uppercase text-center mt-3">edit plate</h1>
             @include('partials.errors')
             <div class="mb-3">
@@ -85,9 +85,22 @@
 
             <p>* Required fields</p>
 
-            <button class="btn btn-primary" type="submit">edit plate</button>
+            <button class="my_btn" type="submit">edit plate</button>
 
 
         </div>
     </form>
+    <style>
+        form {
+            padding: 10rem 0;
+            background-image: url('/img/sfondo.jpeg');
+            background-size: cover
+        }
+
+        .container {
+            background-color: #ff9e45;
+            padding: 1rem;
+            border-radius: 2rem
+        }
+    </style>
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <div class="background"></div>
     <section class="plates">
         <div class="container">
 
@@ -103,18 +104,13 @@
                         </tr>
                     </tbody>
                 </table>
-                {{$plates->links('vendor.pagination.bootstrap-5')}}
+                {{ $plates->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
         <!-- /.container -->
 
     </section>
     <style scoped>
-        .plates {
-            background-image: url('/img/sfondo.jpeg');
-            background-size: cover
-        }
-
         .container {
             font-family: "Unbounded", cursive;
         }
@@ -146,6 +142,11 @@
         .table-primary {
             --bs-table-bg: #ff9e45;
             --bs-table-border-color: black;
+        }
+
+        table {
+            position: relative;
+            margin-top: 2rem;
         }
     </style>
 @endsection

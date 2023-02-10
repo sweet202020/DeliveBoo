@@ -145,9 +145,26 @@ body {
 }
 
 .background {
-  width: 100%;
+  position: absolute;
+  width: 83%;
   height: 100%;
   background-image: url('/img/sfondo.jpeg');
   background-size: cover;
   background-repeat: repeat-y
+}
+
+.my_btn {
+  background-color: yellow;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 2rem;
+  color: black;
+  transition: 0.5s;
+  text-transform: uppercase;
+  font-weight: bold
+}
+
+.my_btn:hover {
+  background-color: rgb(187, 187, 31);
+  transition: 0.5s
 }
