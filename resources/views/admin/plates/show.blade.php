@@ -2,6 +2,7 @@
 <div class="background"></div>
 @section('content')
     <div class="container">
+
         <div class="card">
             <h1 class="">{{ $plate->name }}</h1>
             <div class="row">
@@ -17,6 +18,19 @@
                             </div>
                         </div>
                     @endif
+
+        <a class="btn btn-primary" href="{{ route('admin.plates.index') }}" role="button"><i
+            class="fas fa-angle-left fa-fw"></i></a>
+        <div class="title">
+            <h1><span class="text-uppercase">name: </span>{{ $plate->name }}</h1>
+        </div>
+        <div class="image m-3">
+            @if ($plate->cover_image)
+                <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
+            @else
+                <div class="placeholder-glow p-5 bg-danger">
+                    placeholder
+
                 </div>
                 <div class="col-6 mt-5">
                     <p>{{ $plate->description }}</p>

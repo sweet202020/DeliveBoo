@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 @section('content')
+<a class="btn btn-primary" href="{{ route('admin.plates.index') }}" role="button"><i
+    class="fas fa-angle-left fa-fw"></i></a>
     <form action="{{ route('admin.plates.update', $plate->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -84,6 +86,7 @@
             <p>* Required fields</p>
 
             <button class="btn btn-primary" type="submit">edit plate</button>
+
 
         </div>
     </form>
