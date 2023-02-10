@@ -9,7 +9,7 @@
         <!-- name -->
         <div class="mb-3">
             <label for="restaurant_name" class="form-label">Name</label>
-            <input type="text" name="restaurant_name" id="restaurant_name" class="form-control @error('restaurant_name') is-invalid @enderror" placeholder="add restaurant name" aria-describedby="titleHlper" value="{{ old('restaurant_name') }}" required>
+            <input type="text" name="restaurant_name" id="restaurant_name" class="form-control @error('restaurant_name') is-invalid @enderror" placeholder="add restaurant name" aria-describedby="titleHlper" value="{{ old('restaurant_name') }}" required maxlength="80">
         </div>
         @error('restaurant_name')
         <div class="alert alert-danger">{{ $message }}</div>

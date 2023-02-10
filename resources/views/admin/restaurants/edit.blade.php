@@ -22,7 +22,7 @@
                 <input type="text" name="restaurant_name" id="restaurant_name"
                     class="form-control @error('restaurant_name') is-invalid @enderror" placeholder="add restaurant name"
                     aria-describedby="titleHlper" value="{{ old('restaurant_name', $restaurant->restaurant_name) }}"
-                    required>
+                    required maxlength="80">
             </div>
             @error('restaurant_name')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -33,7 +33,7 @@
                 <label for="address" class="form-label">Address</label>
                 <input type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" placeholder="add restaurant address"
-                    aria-describedby="titleHlper" value="{{ old('address', $restaurant->address) }}"required>
+                    aria-describedby="titleHlper" value="{{ old('address', $restaurant->address) }}"required maxlength="100">
             </div>
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -55,7 +55,7 @@
                 <label for="delivery_price" class="form-label">Delivery Price</label>
                 <input type="number" step="0.01" name="delivery_price" id="delivery_price"
                     class="form-control @error('delivery_price') is-invalid @enderror" placeholder="add restaurant name"
-                    aria-describedby="titleHlper" value="{{ old('delivery_price', $restaurant->delivery_price) }}">
+                    aria-describedby="titleHlper" value="{{ old('delivery_price', $restaurant->delivery_price) }}" max="100"  min="0">
             </div>
             @error('delivery_price')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -66,7 +66,7 @@
                 <label for="partita_iva" class="form-label">VAT</label>
                 <input type="text" name="partita_iva" id="partita_iva"
                     class="form-control @error('partita_iva') is-invalid @enderror" placeholder="add restaurant vat"
-                    aria-describedby="titleHlper" value="{{ old('partita_iva', $restaurant->partita_iva) }}"required>
+                    aria-describedby="titleHlper" value="{{ old('partita_iva', $restaurant->partita_iva) }}"required maxlength="20">
             </div>
             @error('partita_iva')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
             <div class="mb-3">
                 <label for="types" class="form-label">Types</label>
                 <select multiple class="form-select form-select-lg" name="types[]" id="types">
-                    <option value="" disabled>Select one</option>
+                    <option value="" disabled>Select Types</option>
                     @forelse($types as $type)
                         @if ($errors->any())
                             <option
