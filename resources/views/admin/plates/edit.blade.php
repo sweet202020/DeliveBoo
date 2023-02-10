@@ -26,7 +26,7 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">price *</label>
-                <input type="number" step="0.01" required max="999.99" name="price" id="price"
+                <input type="number" step="0.01" required min="0.3" max="999.99" name="price" id="price"
                     class="form-control" placeholder="" aria-describedby="helpId" value="{{ $plate->price }}">
             </div>
 
@@ -37,7 +37,7 @@
                 <input class="form-check-input" type="checkbox" value=1 name="best_seller" id="best_seller"
                     {{ old('best_seller') || $plate['best_seller'] == '1' ? 'checked' : '' }}>
                 <label class="form-check-label" for="best_seller">
-                    Best Seller
+                    click here if you want to highlight your plate
                 </label>
             </div>
 
@@ -49,14 +49,13 @@
                 <input class="form-check-input" type="checkbox" value=1 name="visible" id="visible"
                     {{ old('visible') || $plate['visible'] == '1' ? 'checked' : '' }}>
                 <label class="form-check-label" for="visible">
-                    available
+                    click here if the plate is available
                 </label>
             </div>
 
             {{-- ./visible --}}
-
-            <div class="mb-3">
-                <label for="cover_image" class="form-label">cover image</label>
+            <label class="mt-3" for="cover_image">change cover image</label>
+            <div class="mb-3 d-flex">
                 <img width="200" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
                 <input type="file" max="5000" name="cover_image" id="cover_image" class="form-control"
                     placeholder="add cover image " aria-describedby="helpId">
@@ -84,7 +83,7 @@
 
             <p>* Required fields</p>
 
-            <button type="submit">edit plate</button>
+            <button class="btn btn-primary" type="submit">edit plate</button>
 
         </div>
     </form>
