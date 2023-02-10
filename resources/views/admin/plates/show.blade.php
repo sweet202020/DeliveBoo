@@ -13,7 +13,7 @@
                         <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
                     @else
                         <div class="placeholder-glow position-relative">
-                            <div class="position-absolute">
+                            <div class="position_absolute">
                                 placeholder
                             </div>
                         </div>
@@ -105,11 +105,18 @@
             text-align: center;
         }
 
-        .position-absolute {
+        .position_absolute {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-transform: uppercase;
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
         }
 
         .col-6,

@@ -24,7 +24,7 @@
     <div id="app">
 
 
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow header">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 d-flex align-items-center ps-5"
                 href="{{ url('/') }}"> <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="16"
                     height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
@@ -106,3 +106,6 @@
 </body>
 
 </html>
+<style>
+
+</style>
