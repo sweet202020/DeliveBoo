@@ -66,6 +66,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <strong class="ms-3"><a
+                                        class=""href="{{ route('login') }}">{{ __('Login!') }}</a>
+                                </strong>
                             </div>
                         </div>
                     </form>
