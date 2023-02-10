@@ -3,15 +3,15 @@
 @section('content')
     <div class="container m-auto py-3">
         @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
-    @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1 class="mb-3">Restaurant Info</h1>
         <form action="{{ route('admin.restaurants.update', $restaurant->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -33,29 +33,45 @@
                 <label for="address" class="form-label">Address</label>
                 <input type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" placeholder="add restaurant address"
-                    aria-describedby="titleHlper" value="{{ old('address', $restaurant->address) }}"required maxlength="100">
+                    aria-describedby="titleHlper" value="{{ old('address', $restaurant->address) }}"required
+                    maxlength="100">
             </div>
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <!-- opening time -->
-            <div class="mb-3">
-                <label for="opening_time" class="form-label">Opening Time</label>
-                <input type="text" name="opening_time" id="opening_time"
-                    class="form-control @error('opening_time') is-invalid @enderror" placeholder="add opening time"
-                    aria-describedby="titleHlper" value="{{ old('opening_time', $restaurant->opening_time) }}">
+            <div class="d-flex gap-3">
+                <!-- opening time -->
+                <div class="mb-3">
+                    <label for="open" class="form-label">Opening Time</label>
+                    <input type="time" name="open" id="open" class="form-control" placeholder="add opening time"
+                        aria-describedby="titleHlper" value="{{ old('open') }}">
+                </div>
+                @error('open')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
+                <!-- closing time -->
+                <div class="mb-3">
+                    <label for="close" class="form-label">Closing Time</label>
+                    <input type="time" name="close" id="close" class="form-control " placeholder="add opening time"
+                        aria-describedby="titleHlper" value="{{ old('close') }}">
+                </div>
+                @error('close')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
-            @error('opening_time')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+
+            <h6>L'orario attuale d'apertura è dalle: {{ old('opening_time', $restaurant->opening_time) }}</h6>
+
 
             <!-- delivery price -->
             <div class="mb-3">
                 <label for="delivery_price" class="form-label">Delivery Price</label>
                 <input type="number" step="0.01" name="delivery_price" id="delivery_price"
-                    class="form-control @error('delivery_price') is-invalid @enderror" placeholder="add restaurant name"
-                    aria-describedby="titleHlper" value="{{ old('delivery_price', $restaurant->delivery_price) }}" max="100"  min="0">
+                    class="form-control @error('delivery_price') is-invalid @enderror" placeholder="add delivery price"
+                    aria-describedby="titleHlper" value="{{ old('delivery_price', $restaurant->delivery_price) }}"
+                    max="100" min="0.01" required>
             </div>
             @error('delivery_price')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -66,7 +82,8 @@
                 <label for="partita_iva" class="form-label">VAT</label>
                 <input type="text" name="partita_iva" id="partita_iva"
                     class="form-control @error('partita_iva') is-invalid @enderror" placeholder="add restaurant vat"
-                    aria-describedby="titleHlper" value="{{ old('partita_iva', $restaurant->partita_iva) }}"required maxlength="20">
+                    aria-describedby="titleHlper" value="{{ old('partita_iva', $restaurant->partita_iva) }}"required
+                    maxlength="20">
             </div>
             @error('partita_iva')
                 <div class="alert alert-danger">{{ $message }}</div>

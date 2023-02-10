@@ -53,6 +53,10 @@ class RestaurantController extends Controller
         $slug_data = Restaurant::createSlug($val_data['restaurant_name']);
         $val_data['slug'] =  $slug_data;
         $val_data['user_id'] = Auth::id();
+        if ($request['open'] && $request['open'] ){        
+            $open = strval($request['open']);
+            $close = strval($request['close']);
+            $val_data['opening_time'] = $open . "/" . $close;}
         $restaurant = Restaurant::create($val_data);
         if ($request->has('types')) {
             $restaurant->types()->attach($val_data['types']);
@@ -97,6 +101,7 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
+      
         $val_data = $request->validated();
         if ($request['cover_image']){
             if($restaurant['cover_image']){
@@ -108,6 +113,12 @@ class RestaurantController extends Controller
 
         $slug_data = Restaurant::createSlug($val_data['restaurant_name']);
         $val_data['slug'] =  $slug_data;
+        if ($request['open'] && $request['open'] ){        
+            $open = strval($request['open']);
+            $close = strval($request['close']);
+            $val_data['opening_time'] = $open . "/" . $close;}
+    
+        // dd($val_data);
         $restaurant->update($val_data);
         
         if ($request->has('types')) {
