@@ -26,11 +26,12 @@ class StoreRestaurantRequest extends FormRequest
         return [
             'restaurant_name'=>'required|max:80',
             'address'=>'required|max:100',
-            'opening_time' => 'nullable|max:50',
-            'delivery_price' =>'nullable|max:7',
+            'delivery_price' =>'required|numeric|min:0.0|not_in:0',
             'cover_image' => 'nullable|image|max:300',
             'partita_iva' => 'required|max:20',
-            'types' => 'exists:types,id'
+            'types'  => 'nullable|exists:types,id',
+            'open' => 'nullable|date_format:H:i',
+            'close' => 'nullable|date_format:H:i'
         ];
     }
 }
