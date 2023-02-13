@@ -28,4 +28,5 @@ Route::post('/orders', [LeadController::class, 'store']);
 
 // Route for restaurants API
 Route::get('/restaurants', [RestaurantController::class, 'index']);
-Route::get('/restaurants/{nome}', [RestaurantController::class, 'show']);
+Route::get('/restaurants/filter/{nome}', [RestaurantController::class, 'filter']);
+Route::get('/restaurants/{restaurant:slug}', [RestaurantController::class, 'show']);

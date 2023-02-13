@@ -12,11 +12,11 @@ class RestaurantController extends Controller
     {
         return response()->json([
             'success' => true,
-            'results' => Restaurant::with('plates', 'types')->orderByDesc('id')->paginate(2),
+            'results' => Restaurant::with('plates', 'types')->orderByDesc('id'),
         ]);
     }
 
-    public function show($name)
+    public function filter($name)
     {
         
         $restaurant = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
@@ -31,7 +31,24 @@ class RestaurantController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'results' => 'Post not found'
+                'results' => null
+            ]);
+        }
+    }
+    public function show($slug)
+    {
+        
+        $restaurant = Restaurant::with('users', 'plates', 'types')->where('slug', '=', $slug)->first();
+
+        if ($restaurant) {
+            return response()->json([
+                'success' => true,
+                'results' => $restaurant
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'results' => null
             ]);
         }
     }
