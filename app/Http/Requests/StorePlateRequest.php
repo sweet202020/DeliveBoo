@@ -25,7 +25,7 @@ class StorePlateRequest extends FormRequest
     {
         return [
             'name'=>'required|min:3|max:100',
-            'description'=>'required|min:3|max:1000',
+            'description'=>'required|min:3|max:500',
             'price'=>'required|max:5|min:0',
             'cover_image'=>'image|max:5000',
             'best_seller'=>'boolean',

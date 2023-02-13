@@ -27,7 +27,7 @@ class UpdatePlateRequest extends FormRequest
             'name'=>'required|min:3|max:100',
             'description'=>'required|min:3|max:1000',
             'price'=>'required|max:5|min:0',
-            'cover_image'=>'max:100',
+            'cover_image'=>'image|max:500',
             'best_seller'=>'boolean',
             'visible'=>'boolean',
             'category_id'=>'nullable|exists:categories,id'
