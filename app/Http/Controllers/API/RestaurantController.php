@@ -16,11 +16,14 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show($name)
     {
-        $restaurant = Restaurant::with('users', 'plates', 'types')->where('slug', '=', $slug)->first();
+        
+        $restaurant = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
+            $q->where('name', '=', $name);
+        })->get();
 
-        if ($restaurant) {
+        if (count($restaurant)>0) {
             return response()->json([
                 'success' => true,
                 'results' => $restaurant
