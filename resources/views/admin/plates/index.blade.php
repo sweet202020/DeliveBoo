@@ -4,7 +4,7 @@
 <section class="plates">
     <div class="container">
 
-        <a class="position-relative" href="{{ route('admin.plates.create') }}"><button class="btn btn-outline-warning btn_add my-3">ADD PLATE</button>
+        <a class="position-relative" href="{{ route('admin.plates.create') }}"><button class="btn btn-outline-warning btn_add my-3"><span class="me-3">ADD PLATE</span><i class="fa-regular fa-square-plus"></i></button>
         </a>
         <!-- /.btn -->
         @if (session('message'))
