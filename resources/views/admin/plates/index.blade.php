@@ -5,7 +5,7 @@
         <div class="container">
 
             <a class="position-relative" href="{{ route('admin.plates.create') }}"><button
-                    class="btn btn-outline-warning my-3">add plate +</button>
+                    class="btn btn-outline-warning btn_add my-3">ADD PLATE</button>
             </a>
             <!-- /.btn -->
             @if (session('message'))
@@ -25,10 +25,10 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-primary align-middle">
-                    <thead>
+                <table class="table align-middle">
+                    <thead class="table_top">
                         <tr>
-                            <th scope="col">id</th>
+                            <!-- <th scope="col">id</th> -->
                             <th scope="col">name</th>
                             <th scope="col">description</th>
                             <th scope="col">cover image</th>
@@ -36,10 +36,10 @@
                             <th scope="col">actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table_bottom">
                         @forelse ($plates as $plate)
                             <tr class="">
-                                <td scope="row">{{ $plate->id }}</td>
+                                <!-- <td scope="row">{{ $plate->id }}</td> -->
                                 <td>{{ $plate->name }}</td>
                                 <td>{{ $plate->description }}</td>
                                 <td>
@@ -55,7 +55,7 @@
                                 </td>
                                 <td>{{ $plate->price . '€' }}</td>
                                 <td><a href="{{ route('admin.plates.show', $plate->slug) }}"
-                                        class="btn btn-outline-warning">show</a>
+                                        class="btn btn-outline-warning show">show</a>
                                     <a
                                         href="{{ route('admin.plates.edit', $plate->slug) }}"class="btn btn-outline-info">edit</a>
                                     <!-- Modal trigger button -->
@@ -112,18 +112,21 @@
 
     </section>
     <style scoped>
+        
         .container {
             font-family: "Unbounded", cursive;
         }
 
         img {
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
         }
 
         .placeholder-glow {
-            background-color: rgb(107, 190, 107);
+            background-color: #ff9e45;
+            opacity: 65%;
+            color: black;
             width: 200px;
             height: 200px;
             text-align: center;
@@ -136,18 +139,40 @@
             text-transform: uppercase;
         }
 
-        .btn-outline-warning {
-            background-color: #f5612c;
-        }
+        /* .btn-outline-warning {
+            background-color: green;
+        } */
 
-        .table-primary {
-            --bs-table-bg: #ff9e45;
-            --bs-table-border-color: black;
-        }
+        /* .table-primary {
+            --bs-table-bg: #f1f1f1;
+            --bs-table-border-color: #0086A8;
+        } */
 
         table {
             position: relative;
             margin-top: 2rem;
         }
+
+        .table_top{
+            background-color:#ff9e45;
+        }
+
+        .table_bottom{
+            background-color: #f1f1f1;
+        }
+        /*#region button */
+        .btn_add{
+            background-color: #f5612c;
+            color: #f1f1f1;
+            border: none;
+            transition: 1s;
+        }
+
+        .btn_add:hover{
+            background-color: #ff9e45;
+            border: none;
+        }
+
+       
     </style>
 @endsection

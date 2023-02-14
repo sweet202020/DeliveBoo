@@ -3,18 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Unbounded:wght@200;300;400&display=swap');
 @import './variables.scss';
 
-.segnaposto{
+.segnaposto {
     display: flex;
     width: 140px;
     aspect-ratio: 1/1;
-    color: lightgray;
-    background-color: gray;
+    color: gray;
+    background-color: #f1f1f1;
     align-items: center;
     justify-content: center;
-    
-  }
 
-  .bg_blue {
+}
+
+.bg_blue {
     background: $deliveboo-secondary;
 }
 
