@@ -16,17 +16,24 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function filter($name)
+    public function filter($nomi)
     {
-        
-        $restaurant = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
-            $q->where('name', '=', $name);
-        })->get();
 
-        if (count($restaurant)>0) {
+    
+        $finalFilter =[];
+        $names =explode(',',$nomi);
+        foreach ($names as $name) {
+            $restaurant = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
+                $q->where('name', '=', $name);
+            })->get();
+            array_push($finalFilter, $restaurant);
+        }
+     
+
+        if (count($finalFilter)>0) {
             return response()->json([
                 'success' => true,
-                'results' => $restaurant
+                'results' => $finalFilter
             ]);
         } else {
             return response()->json([
@@ -37,8 +44,11 @@ class RestaurantController extends Controller
     }
     public function show($slug)
     {
-        
-        $restaurant = Restaurant::with('users', 'plates', 'types')->where('slug', '=', $slug)->first();
+        response()->json([
+            'success' => true,
+            'results' => $slug
+        ]);
+        $restaurant = Restaurant::with('users', 'plates', 'types')->where('slug', '=', $slug)->get;
 
         if ($restaurant) {
             return response()->json([
