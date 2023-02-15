@@ -63,16 +63,13 @@
         padding: 0.5rem !important;
         font-family: 'Unbounded', cursive;
         border-radius: 5px;
-        transition: 0.5s;
-    
-        &:hover {
+        transition: 0.5s;    
+    }
+    a:hover {
             color: #f5612c !important;
             background-color: #f1f1f1;
             font-family: 'Unbounded', cursive;
             border-radius: 5px;
-        }
-    
-    
     }
     
     </style>
