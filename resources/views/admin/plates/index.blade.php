@@ -39,8 +39,8 @@
                     @forelse ($plates as $plate)
                     <tr class="">
                         <!-- <td scope="row">{{ $plate->id }}</td> -->
-                        <td>{{ $plate->name }}</td>
-                        <td>{{ $plate->description }}</td>
+                        <td><p>{{ $plate->name }}</p></td>
+                        <td><p>{{ $plate->description }}</p></td>
                         <td>
                             @if ($plate->cover_image)
                             <img src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
@@ -113,10 +113,21 @@
         object-fit: contain;
     }
 
+    p{
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
     .placeholder-glow {
+        /* 
         background-color: #ff9e45;
-        opacity: 60%;
+        opacity: 60%; 
         color: black;
+        */
+        background-color: #a5a5a5;
+        opacity: 60%;
+        color: #f1f1f1;
+        border-radius: 0.5rem;
         width: 150px;
         height: 150px;
         text-align: center;

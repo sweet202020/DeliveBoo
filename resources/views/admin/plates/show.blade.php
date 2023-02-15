@@ -1,20 +1,22 @@
 @extends('layouts.admin')
-<div class="background"></div>
-@section('content')
-    <div class="container">
 
+@section('content')
+<div class="background">
+
+
+    <div class="container">
         <div class="card">
             <h1 class="">{{ $plate->name }}</h1>
             <div class="row">
                 <div class="col-6">
                     <div class="image m-3">
                         @if ($plate->cover_image)
-                            <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
+                        <img width="500" src="{{ asset('storage/' . $plate->cover_image) }}" alt="">
                         @else
-                            <div class="placeholder-glow p-5 bg-danger">
-                                placeholder
+                        <div class="placeholder-glow p-5 bg-danger">
+                            placeholder
 
-                            </div>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -22,12 +24,12 @@
                     <p>{{ $plate->description }}</p>
                     <div>
                         @if ($plate->best_seller)
-                            <p class="best-seller">il piatto e' tra i piu' richiesti</p>
+                        <p class="best-seller">il piatto e' tra i piu' richiesti</p>
                         @endif
                         @if ($plate->visible)
-                            <p class="visible">il piatto e' disponibile</p>
+                        <p class="visible">il piatto e' disponibile</p>
                         @else
-                            <p class="not-visible">il piatto non e' disponibile</p>
+                        <p class="not-visible">il piatto non e' disponibile</p>
                         @endif
                         <div>
                             <h6>Category: {{ $plate->category ? $plate->category->name : 'Uncategorized' }}</h6>
@@ -38,8 +40,7 @@
             </div>
             <div class="d-flex">
                 <button class="my_btn m-3">
-                    <a class="my_btn " href="{{ route('admin.plates.index') }}" role="button"><i
-                            class="fas fa-angle-left fa-fw"></i></a>
+                    <a class="my_btn " href="{{ route('admin.plates.index') }}" role="button"><i class="fas fa-angle-left fa-fw"></i>back</a>
                 </button>
                 <button class="my_btn m-3">
                     <a href="{{ route('admin.plates.edit', $plate->slug) }}">edit
@@ -48,69 +49,70 @@
             </div>
         </div>
     </div>
-    <style scoped lang="scss">
-        .container {
-            font-family: "Unbounded", cursive;
-        }
+</div>
+<style scoped lang="scss">
+    .container {
+        font-family: "Unbounded", cursive;
+    }
 
-        h1 {
-            text-align: center;
-            background-color: #f5612c
-        }
+    h1 {
+        text-align: center;
+        background-color: #f5612c
+    }
 
-        .card {
-            position: absolute;
-            background-color: #f5612c;
-            box-shadow: 1rem 1rem black;
-            width: 65%;
-            top: 50%;
-            transform: translate(0, -50%);
-            background-color: #f5612c;
-            box-shadow: 1rem 1rem black
-        }
+    .card {
+        position: absolute;
+        background-color: #f5612c;
+        box-shadow: 1rem 1rem black;
+        width: 65%;
+        top: 50%;
+        transform: translate(0, -50%);
+        background-color: green;
+        box-shadow: 1rem 1rem black
+    }
 
 
-        button {
-            width: 100px
-        }
+    button {
+        width: 100px
+    }
 
-        .best-seller,
-        .visible,
-        .not-visible {
-            font-weight: bold
-        }
+    .best-seller,
+    .visible,
+    .not-visible {
+        font-weight: bold
+    }
 
-        .visible {
-            color: green
-        }
+    .visible {
+        color: green
+    }
 
-        .not-visible {
-            color: red
-        }
+    .not-visible {
+        color: red
+    }
 
-        .placeholder-glow {
-            background-color: rgb(107, 190, 107);
-            height: 100%;
-            text-align: center;
-        }
+    .placeholder-glow {
+        background-color: rgb(107, 190, 107);
+        height: 100%;
+        text-align: center;
+    }
 
-        .position_absolute {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-transform: uppercase;
-        }
+    .position_absolute {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-transform: uppercase;
+    }
 
-        .header {
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+    .header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
 
-        .col-6,
-        h6 {
-            font-size: 30px
-        }
-    </style>
+    .col-6,
+    h6 {
+        font-size: 30px
+    }
+</style>
 @endsection
