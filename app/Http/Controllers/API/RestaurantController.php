@@ -23,10 +23,13 @@ class RestaurantController extends Controller
         $finalFilter =[];
         $names =explode(',',$nomi);
         foreach ($names as $name) {
-            $restaurant = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
+            $restaurants = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
                 $q->where('name', '=', $name);
             })->get();
-            array_push($finalFilter, $restaurant);
+            foreach ($restaurants as $restaurant) {
+                array_push($finalFilter, $restaurant);
+            }
+ 
         }
      
 
