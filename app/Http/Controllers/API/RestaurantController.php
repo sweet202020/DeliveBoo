@@ -27,7 +27,9 @@ class RestaurantController extends Controller
                 $q->where('name', '=', $name);
             })->get();
             foreach ($restaurants as $restaurant) {
-                array_push($finalFilter, $restaurant);
+                if(!in_array($restaurant, $finalFilter)){
+                    array_push($finalFilter, $restaurant);
+                }
             }
  
         }
