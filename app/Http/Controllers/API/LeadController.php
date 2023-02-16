@@ -16,7 +16,7 @@ class LeadController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'price' => 'required|decimal:2|max:6',
+            'price' => 'required|max:6',
             'customer_name' => 'required|max:100',
             'delivery_address' => 'required|max:100',
             'phone_number' => 'required|max:13'
@@ -37,6 +37,4 @@ class LeadController extends Controller
             'success' => true
         ]);
     }
- 
-
 }
