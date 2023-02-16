@@ -17,6 +17,8 @@ class OrderController extends Controller
         $validator = Validator::make($data, [
             'price' => 'required|max:6',
             'customer_name' => 'required|max:100',
+            // 'plate_id' => 'required|exists:plates,id',
+            // 'plate_quantity' => 'required',
             'delivery_address' => 'required|max:100',
             'phone_number' => 'required|max:13'
         ]);
