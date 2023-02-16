@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LeadController;
+use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\RestaurantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //SARANNO DA APRIRE LE ROTTE PER FAR VISUALIZZARE ALLA PARTE FRONT I PIATTI E RISTORANTI 
-Route::post('/order', [LeadController::class, 'store']);
+Route::post('/order', [OrderController::class, 'store']);
 
 // Route for restaurants API
 Route::get('/restaurants', [RestaurantController::class, 'index']);

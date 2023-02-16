@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lead;
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Order;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class LeadController extends Controller
+class OrderController extends Controller
 {
     public function store(Request $request)
     {
@@ -29,9 +28,9 @@ class LeadController extends Controller
             ]);
         }
 
-        $new_lead = new Lead();
-        $new_lead->fill($data);
-        $new_lead->save();
+        $new_order = new Order();
+        $new_order->fill($data);
+        $new_order->save();
 
         return response()->json([
             'success' => true
