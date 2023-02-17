@@ -21,6 +21,8 @@ class OrderController extends Controller
             'phone_number' => 'required|max:13',
         ]);
 
+
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -36,19 +38,8 @@ class OrderController extends Controller
         //     }
         // }
 
-        // define('DB_SERVERNAME', "localhost");
-        // define('DB_USERNAME', "root");
-        // define('DB_PASSWORD', "root");
-        // define('DB_NAME', "deliveboo");
-        // if (isset($nome) && $cognome) {
-        //     $conn = new mysqli(DB_SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        //     $invio = $conn->prepare("INSERT INTO users (name, surname) VALUE (?,?)");
-        //     $invio->bind_param("ss", $nome, $cognome);
-        //     $invio->execute();
-        //     $conn->close();
-        // }
-
         $new_order = new Order();
+        //$new_order->plates()->sync([$request]);
         $new_order->fill($data);
         $new_order->save();
 
