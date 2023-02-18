@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //SARANNO DA APRIRE LE ROTTE PER FAR VISUALIZZARE ALLA PARTE FRONT I PIATTI E RISTORANTI 
-Route::post('/order', [OrderController::class, 'store']);
+Route::get('/order', [OrderController::class, 'store']);
 
 // Route for restaurants API
 Route::get('/restaurants', [RestaurantController::class, 'index']);

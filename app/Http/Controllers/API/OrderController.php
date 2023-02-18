@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Plate;
 
 class OrderController extends Controller
 {
     public function store(Request $request)
     {
+        $allPlates= $request->order_plate;
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -30,18 +32,18 @@ class OrderController extends Controller
             ]);
         }
 
-        // if ($request->has('order_plate')) {
-        //     for ($i = 0; $i < count($request['order_plate']); $i++) {
-        //         $plate_quantity = $request['order_plate'][$i]->quantita;
-        //         $plate_id = $request['order_plate'][$i]->id;
-        //         $new_order->plates()->attach($request['order_plate'][$i]);
-        //     }
-        // }
+        
 
         $new_order = new Order();
-        //$new_order->plates()->sync([$request]);
         $new_order->fill($data);
+        
         $new_order->save();
+        for ($j = 0; $j < count($allPlates); $j++) {
+            $plate = Plate::where('name', '=', $allPlates[$j]->name);
+            $plate_id = $plate->id;
+            $quantity = $plate->quantita;
+            $new_order->plates()->attach($plate_id, array('quantity' => $quantity));
+        }
 
         return response()->json([
             'success' => true,
