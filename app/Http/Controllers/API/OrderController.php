@@ -13,7 +13,8 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $allPlates= $request->order_plate;
+
+        
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -23,8 +24,6 @@ class OrderController extends Controller
             'phone_number' => 'required|max:13',
         ]);
 
-
-
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -32,17 +31,14 @@ class OrderController extends Controller
             ]);
         }
 
-        
-
         $new_order = new Order();
         $new_order->fill($data);
-        
         $new_order->save();
-        for ($j = 0; $j < count($allPlates); $j++) {
-            $plate = Plate::where('name', '=', $allPlates[$j]->name);
-            $plate_id = $plate->id;
-            $quantity = $plate->quantita;
-            $new_order->plates()->attach($plate_id, array('quantity' => $quantity));
+
+        $allPlates= $request->order_plate;
+
+        foreach ($allPlates as $singlePlate) {
+            $new_order->plates()->attach($singlePlate['id'], array('plate_quantity' =>$singlePlate['quantita']));
         }
 
         return response()->json([
