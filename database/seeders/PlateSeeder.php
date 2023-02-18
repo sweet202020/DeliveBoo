@@ -18,8 +18,8 @@ class PlateSeeder extends Seeder
     public function run()
     {
         $plates = config('db.plates');
-        foreach($plates as $plate){
-            $new_plate = new Plate(); 
+        foreach ($plates as $plate) {
+            $new_plate = new Plate();
             $new_plate->name = $plate['name'];
             $new_plate->slug = Str::slug($new_plate->name, '-');
             $new_plate->description = $plate['description'];
@@ -28,8 +28,8 @@ class PlateSeeder extends Seeder
             $new_plate->visible = $plate['visible'];
             $new_plate->restaurant_id = $plate['restaurant_id'];
             $new_plate->cover_image = $plate['cover_image'];
+            $new_plate->category_id = $plate['category_id'];
             $new_plate->save();
         }
-     
     }
 }
