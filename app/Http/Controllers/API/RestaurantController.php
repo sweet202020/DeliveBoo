@@ -8,18 +8,10 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function index()
-    {
-        return response()->json([
-            'success' => true,
-            'results' => Restaurant::with('plates', 'types')->orderByDesc('id'),
-        ]);
-    }
 
     public function filter($nomi)
     {
 
-    
         $finalFilter =[];
         $names =explode(',',$nomi);
         foreach ($names as $name) {
@@ -27,7 +19,7 @@ class RestaurantController extends Controller
                 $q->where('name', '=', $name);
             })->get();
             foreach ($restaurants as $restaurant) {
-                if(!in_array($restaurant, $finalFilter)){
+                if(!in_array($restaurant, $finalFilter) && count($restaurant->types) >= count($names)){
                     array_push($finalFilter, $restaurant);
                 }
             }
