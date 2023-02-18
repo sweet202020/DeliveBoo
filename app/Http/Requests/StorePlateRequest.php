@@ -30,7 +30,7 @@ class StorePlateRequest extends FormRequest
             'cover_image' => 'image|max:5000',
             'best_seller' => 'boolean',
             'visible' => 'boolean',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id'
 
         ];
     }

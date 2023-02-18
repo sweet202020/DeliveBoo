@@ -28,7 +28,6 @@ class PlateSeeder extends Seeder
             $new_plate->visible = $plate['visible'];
             $new_plate->restaurant_id = $plate['restaurant_id'];
             $new_plate->cover_image = $plate['cover_image'];
-            $new_plate->category_id = $plate['category_id'];
             $new_plate->save();
         }
     }
