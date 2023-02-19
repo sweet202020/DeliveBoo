@@ -24,7 +24,7 @@
     <div id="app">
 
 
-        <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow header orange_color mb-3">
+        <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow header orange_color mb-3 font_size">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 d-flex align-items-center justify-content-start" href="{{ url('/') }}">
                 <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                     <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
@@ -54,7 +54,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav flex-column">
+                    <ul class="nav flex-column font_size">
                         <li class="nav-item">
                             @if (Auth::user()->restaurants)
                             <a class="nav-link {{ Route::currentRouteName() === 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin') }}">{{ __('Dashboard') }}</a>
@@ -101,9 +101,19 @@
         background-color: #ff9e45;
     }
 
-    .color_white{
+    .color_white {
         color: white;
     }
+
+    .font_size {
+        font-size: 1.2rem;
+    }
+
+    body {
+        background-image: url('../../../public/img/sfondo_ristoranti_2.jpg');
+        background-size: cover;
+    }
+
 
     /*  f5612c */
 </style>
