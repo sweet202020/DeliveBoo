@@ -12,7 +12,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <div class="container m-auto py-3">
+        <div class="container m-auto py-">
             <h1 class="mb-3">Restaurant Info</h1>
             @csrf
             @method('PUT')
@@ -142,7 +142,7 @@
     </form>
     <style>
         form {
-            padding: 10rem 0;
+            padding: 4rem 2rem;
             background-image: url('/img/sfondo.jpeg');
             background-size: cover
         }
