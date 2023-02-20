@@ -28,21 +28,22 @@ class RestaurantController extends Controller
     {
 
         $finalFilter =[];
-        $names =explode(',',$nomi);
-            $restaurants = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($names) {
-                $q->whereIn('name', $names);
+        $names = explode(',',$nomi);
+    foreach ($names as $name){
+            $restaurants = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
+                $q->where('name', '=', $name);
             })->get();
             foreach ($restaurants as $restaurant) {
                 if(!in_array($restaurant, $finalFilter) && count($restaurant->types) >= count($names)){
                     array_push($finalFilter, $restaurant);
                 }
             }
- 
+        }
 
-        if (count($finalFilter)>0) {
+        if ($restaurants) {
             return response()->json([
                 'success' => true,
-                'results' => $finalFilter
+                'results' => $restaurants
             ]);
         } else {
             return response()->json([
