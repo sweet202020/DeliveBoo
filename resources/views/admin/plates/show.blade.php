@@ -82,7 +82,6 @@
         border: none;
     }
 
-
     img {
         width: 200px;
     }
