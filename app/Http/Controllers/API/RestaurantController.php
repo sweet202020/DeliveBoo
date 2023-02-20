@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
+    public function index(){
+        $restaurants = Restaurant::with('users', 'plates', 'types')->paginate(5);
+        if ($restaurants) {
+            return response()->json([
+                'success' => true,
+                'results' => $restaurants
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'results' => null
+            ]);
+        }
+    }
+
 
     public function filter($nomi)
     {
