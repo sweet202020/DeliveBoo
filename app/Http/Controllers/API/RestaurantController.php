@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $restaurants = Restaurant::with('users', 'plates', 'types')->paginate(5);
         if ($restaurants) {
             return response()->json([
@@ -27,23 +28,24 @@ class RestaurantController extends Controller
     public function filter($nomi)
     {
 
-        $finalFilter =[];
-        $names = explode(',',$nomi);
-    foreach ($names as $name){
-            $restaurants = Restaurant::with('users', 'plates', 'types')->whereHas('types', function($q) use ($name) {
-                $q->where('name', '=', $name);
-            })->get();
-            foreach ($restaurants as $restaurant) {
-                if(!in_array($restaurant, $finalFilter) && count($restaurant->types) >= count($names)){
+        $finalFilter = [];
+        $names = explode(',', $nomi);
+        $restaurants = Restaurant::with('users', 'plates', 'types')->whereHas('types', function ($q) use ($names) {
+            $q->whereIn('name', $names);
+        })->get();
+        foreach ($restaurants as $restaurant) {
+            $appoggio = [];
+            foreach ($restaurant->types as $type) {
+                array_push($appoggio, $type->name);
+                if (!in_array($restaurant, $finalFilter) && count($restaurant->types) >= count($names) && count(array_intersect($appoggio, $names)) == count($names)) {
                     array_push($finalFilter, $restaurant);
                 }
             }
         }
-
-        if ($restaurants) {
+        if (count($finalFilter) > 0) {
             return response()->json([
                 'success' => true,
-                'results' => $restaurants
+                'results' => $finalFilter
             ]);
         } else {
             return response()->json([
