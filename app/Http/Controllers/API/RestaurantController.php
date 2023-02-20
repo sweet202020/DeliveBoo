@@ -37,9 +37,9 @@ class RestaurantController extends Controller
             $appoggio = [];
             foreach ($restaurant->types as $type) {
                 array_push($appoggio, $type->name);
-                if (!in_array($restaurant, $finalFilter) && count($restaurant->types) >= count($names) && count(array_intersect($appoggio, $names)) == count($names)) {
-                    array_push($finalFilter, $restaurant);
-                }
+            }
+            if (!in_array($restaurant, $finalFilter) && count(array_intersect($appoggio, $names)) == count($names)) {
+                    array_push($finalFilter, $restaurant); 
             }
         }
         if (count($finalFilter) > 0) {
